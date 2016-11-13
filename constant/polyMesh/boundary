@@ -1,0 +1,100 @@
+/*----------------------------------------------------------------------------------*\
+|                                                                                    | 
+|    ANSA_VERSION: 14.0.0                                                            | 
+|                                                                                    | 
+|    file created by  A N S A  Fri Sep 16 19:29:38 2016                              | 
+|                                                                                    | 
+|    Output from: C:/work/N304-Reductor/cae/mesh/Untitled                            | 
+|                                                                                    | 
+\*----------------------------------------------------------------------------------*/
+
+
+
+FoamFile
+{
+	version 2.0;
+	format ascii;
+	class polyBoundaryMesh;
+	location "";
+	object boundary;
+}
+/*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*/
+
+
+9
+(
+
+	wall-body.3_importedbody
+	{
+		type wall;
+		startFace 179925;
+		nFaces 2680;
+	}
+
+	tube1_in
+	{
+		type wall;
+		startFace 182605;
+		nFaces 130;
+	}
+
+	if_tube1_out_sharnir1_in
+	{
+		type            cyclicAMI;
+		startFace 182735;
+		nFaces 130;
+		matchTolerance  0.0001;
+		transform       noOrdering;
+		neighbourPatch  if_sharnir1_in_tube1_out;
+	}
+
+	wall-body.3_importedbody1
+	{
+		type wall;
+		startFace 182865;
+		nFaces 3560;
+	}
+
+	tube2_out
+	{
+		type wall;
+		startFace 186425;
+		nFaces 267;
+	}
+
+	if_tube2_in_sharnir1_out
+	{
+		type            cyclicAMI;
+		startFace 186692;
+		nFaces 267;
+		transform       noOrdering;
+		neighbourPatch if_sharnir1_out_tube2_in;
+	}
+
+	wall-body.3_importedbody2
+	{
+		type wall;
+		startFace 186959;
+		nFaces 25480;
+	}
+
+	if_sharnir1_out_tube2_in
+	{
+		type            cyclicAMI;
+		startFace 212439;
+		nFaces 2653;
+		transform       noOrdering;
+		neighbourPatch if_tube2_in_sharnir1_out;
+	}
+
+	if_sharnir1_in_tube1_out
+	{
+		type            cyclicAMI;
+		startFace 215092;
+		nFaces 1294;
+		transform       noOrdering;
+		neighbourPatch if_tube1_out_sharnir1_in;
+	}
+
+)

@@ -1,0 +1,44 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      dynamicMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dynamicFvMesh   solidBodyMotionFvMesh;
+
+motionSolverLibs ( "libfvMotionSolvers.so" );
+
+solidBodyMotionFvMeshCoeffs
+{
+    cellZone        body.3_importedbody2;
+
+    solidBodyMotionFunction  axisRotationMotion;//rotatingMotion;
+//     rotatingMotionCoeffs
+//     {
+//         origin        (0.24889 -0.75284 -0.015444);
+//         axis          (0.012918 -0.75284 -0.031945);
+//         omega         418.84817; // rad/s 4000 rpm = 4000/9.55= 418.8 rad/s
+//         
+//     }
+    axisRotationMotionCoeffs
+    {
+	//origin (0.235972 0 0.016501);
+//       origin (-0.5215 0 0);
+      origin (0.115225 -0.752835 -0.024791);
+	radialVelocity (24000 0 0); // [deg/s]
+    }
+}
+
+
+// ************************************************************************* //

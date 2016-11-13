@@ -1,0 +1,67 @@
+/*----------------------------------------------------------------------------------*\
+|                                                                                    | 
+|    ANSA_VERSION: 14.0.0                                                            | 
+|                                                                                    | 
+|    file created by  A N S A  Mon Aug 15 14:28:13 2016                              | 
+|                                                                                    | 
+|    Output from: D:/work/N304-UAZ-reductor/cae-of/Untitled                          | 
+|                                                                                    | 
+\*----------------------------------------------------------------------------------*/
+
+
+
+FoamFile
+{
+	version 2.0;
+	format ascii;
+	class volVectorField;
+	object U;
+}
+/*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*/
+
+
+dimensions [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+
+boundaryField
+{
+
+	"wall-body.3_importedbody|wall-body.3_importedbody1|wall-body.3_importedbody2"
+	{
+	  type            uniformFixedValue;
+	  uniformValue    (0 0 0);
+// 	  type		zeroGradient;
+	}
+	
+	"if_tube1_out_sharnir1_in|if_tube2_in_sharnir1_out|if_sharnir1_out_tube2_in|if_sharnir1_in_tube1_out"
+	{
+		type            cyclicAMI;
+		value           $internalField;
+	}
+	
+	tube1_in
+	{
+// 	    type          rotatingWallVelocity;
+// 	    origin        (0 -0.67884 -0.032848);
+// 	    axis          (0 -0.80484 -0.032848);
+// 	    omega         -0.837758;
+	  type            uniformFixedValue;
+	  uniformValue    (0 0 0);
+// 	  type		zeroGradient;
+	}
+	
+	tube2_out
+	{
+// 	    type          rotatingWallVelocity;
+// 	    origin        (0 -0.67884 -0.032848);
+// 	    axis          (0 -0.80484 -0.032848);
+// 	    omega         -0.837758;
+	  type            uniformFixedValue;
+	  uniformValue    (0 0 0);
+// 	  type		zeroGradient;
+	}
+
+}
