@@ -12,43 +12,54 @@
 
 FoamFile
 {
-    version     2.0;
-    format      ascii;
-    class       volScalarField;
-    object      nut;
+	version 2.0;
+	format ascii;
+	class volScalarField;
+	location "";
+	object p;//p_rgh;
 }
 /*---------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------*/
 
 
-dimensions      [0 2 -1 0 0 0 0];
+//dimensions       [1 -1 -2 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0;//1.25e5;
 
 
 boundaryField
 {
+
 	"wall-body.3_importedbody|wall-body.3_importedbody1|wall-body.3_importedbody2"
 	{
-		type            calculated; //nutkWallFunction;
-		value           $internalField;
+// 	  type            fixedFluxPressure;
+// 	  phi             phiAbs;
+// 	  value           uniform 0;
+	  type		zeroGradient;
 	}
 
 	"if_tube1_out_sharnir1_in|if_tube2_in_sharnir1_out|if_sharnir1_out_tube2_in|if_sharnir1_in_tube1_out"
 	{
-		type            cyclicAMI;
-	}
+	    type            cyclicAMI;
+	}	
 
 	tube1_in
 	{
-		type            calculated; //nutkWallFunction;
-		value           $internalField;
+// 	  type            fixedFluxPressure;
+// 	  phi             phiAbs;
+// 	  value           uniform 0;
+	    type            fixedValue;
+	    value           uniform 0;
 	}
 	
 	tube2_out
 	{
-		type            calculated; //nutkWallFunction;
-		value           $internalField;
+// 	  type            fixedFluxPressure;
+// 	  phi             phiAbs;
+// 	  value           uniform 0;
+	    type            fixedValue;
+	    value           uniform 0;
 	}
 
 }

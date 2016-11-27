@@ -15,7 +15,14 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     pimpleDyMFoam;
+libs (
+      "libOpenFOAM.so"
+      "libsimpleSwakFunctionObjects.so"
+      "libswakFunctionObjects.so"
+      "libgroovyBC.so"
+     );
+
+application     SRFSimpleFoam;
 
 startFrom       startTime;
 
@@ -23,13 +30,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         5;
+endTime         2000;
 
-deltaT          1e-3;
+deltaT          1e-1;
 
 writeControl    adjustableRunTime;
 
-writeInterval   0.001;
+writeInterval   1;
 
 purgeWrite      0;
 
@@ -48,5 +55,39 @@ runTimeModifiable true;
 adjustTimeStep  yes;
 
 maxCo           0.5;
+maxAlphaCo      1;
+maxDeltaT       1;
+
+functions
+{
+    patchMassFlow
+    {
+        type patchExpression;
+        accumulations (
+            sum
+        );
+        patches (
+            tube1_in
+            tube2_out
+        );
+        expression "phi";
+        verbose true;
+    }
+    
+    massFlowAve
+    {
+        type patchExpression;
+        variables ( "phiAve{patch'outlet}=sum(phi*area())/sum(area());");
+        accumulations (
+           min
+           max
+        );
+        patches (
+            tube2_out
+        );
+        expression "phiAve";
+        verbose true;
+    }
+}
 
 // ************************************************************************* //

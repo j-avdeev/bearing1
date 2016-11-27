@@ -14,17 +14,16 @@ FoamFile
 {
 	version 2.0;
 	format ascii;
-	class volScalarField;
-	location "";
-	object p_rgh;
+	class volVectorField;
+	object U;
 }
 /*---------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------*/
 
 
-dimensions       [1 -1 -2 0 0 0 0];
+dimensions [0 1 -1 0 0 0 0];
 
-internalField   uniform 0;//1.25e5;
+internalField   uniform (0 0 0);
 
 
 boundaryField
@@ -32,32 +31,36 @@ boundaryField
 
 	"wall-body.3_importedbody|wall-body.3_importedbody1|wall-body.3_importedbody2"
 	{
-// 	  type            fixedFluxPressure;
-// 	  phi             phiAbs;
-// 	  value           uniform 0;
-	  type		zeroGradient;
+	    type            fixedValue;
+	    value           uniform ( 0 0 0 );
+// 	  type		zeroGradient;
 	}
-
+	
 	"if_tube1_out_sharnir1_in|if_tube2_in_sharnir1_out|if_sharnir1_out_tube2_in|if_sharnir1_in_tube1_out"
 	{
-		type            cyclicAMI;
-		value           $internalField;
-	}	
-
+	  type            cyclicAMI;
+	}
+	
 	tube1_in
 	{
-// 	  type            fixedFluxPressure;
-// 	  phi             phiAbs;
-// 	  value           uniform 0;
-	  type		zeroGradient;
+// 	    type          rotatingWallVelocity;
+// 	    origin        (0 -0.67884 -0.032848);
+// 	    axis          (0 -0.80484 -0.032848);
+// 	    omega         -0.837758;
+// // 	  type            uniformFixedValue;
+// // 	  uniformValue    (0 0 0);
+	    type            zeroGradient;
 	}
 	
 	tube2_out
 	{
-// 	  type            fixedFluxPressure;
-// 	  phi             phiAbs;
-// 	  value           uniform 0;
-	  type		zeroGradient;
+// 	    type          rotatingWallVelocity;
+// 	    origin        (0 -0.67884 -0.032848);
+// 	    axis          (0 -0.80484 -0.032848);
+// 	    omega         -0.837758;
+// // 	  type            uniformFixedValue;
+// // 	  uniformValue    (0 0 0);
+	    type            zeroGradient;
 	}
 
 }

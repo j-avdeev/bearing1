@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.4.0                                 |
+|  \\    /   O peration     | Version:  4.0                                   |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -11,11 +11,19 @@ FoamFile
     format      ascii;
     class       dictionary;
     location    "constant";
-    object      turbulenceProperties;
+    object      SRFProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType  laminar;
+SRFModel        rpm;
+
+        origin        (0.25712 -0.752835 -0.014868);//(0.25712 -0.752835 -0.014868);
+        axis          (0.235972 0 0.016501);//(0.021148 -0.752835 -0.031369);
+
+rpmCoeffs
+{
+    rpm         4000;
+}
 
 
 // ************************************************************************* //

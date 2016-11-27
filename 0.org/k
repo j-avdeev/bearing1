@@ -23,7 +23,7 @@ FoamFile
 
 dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.01;
+internalField   uniform 0.375;
 
 
 boundaryField
@@ -41,14 +41,12 @@ boundaryField
 	}
 	tube1_in
 	{
-		type            kqRWallFunction;
-		value           $internalField;
+		type            zeroGradient;
 	}
 	
 	tube2_out
 	{
-		type            kqRWallFunction;
-		value           $internalField;
+		type            zeroGradient;
 	}
 
 }

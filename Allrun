@@ -8,9 +8,12 @@ application=`getApplication`
 
 # ./makeMesh
 
-#runApplication $application
+
+# runApplication setFields
+\cp -r 0.org 0
 runApplication decomposePar
-runParallel $application
+runParallel $application 2
 runApplication reconstructPar
+# runApplication $application
 
 # ----------------------------------------------------------------- end-of-file
